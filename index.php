@@ -41,11 +41,11 @@ switch (sanitizeString($action)) {
         $controller->delete_member();
         break;
     case 'account':
-        $controller = new MemberController();
+        $controller = new AccountController();
         $controller->get_account();
         break;
     case 'updateAccount':
-        $controller = new MemberController();
+        $controller = new AccountController();
         $controller->update_account($_POST['id'], $_POST['username'], $_POST['password']);
         break;
     case 'login_page':
