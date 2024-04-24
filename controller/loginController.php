@@ -1,13 +1,11 @@
 <?php
 require_once 'model/members.php';
-require_once 'model/payment.php';
 
  class LoginController{
      public function admin(): void
      {
          require_admin($_SESSION['is_admin']);
-         $model = new Members();
-         $members = $model->get_members();
+         $members = Members::get_members();
          include 'view/admin.php';
      }
 

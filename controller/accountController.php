@@ -1,7 +1,6 @@
 <?php 
-require_once 'model/members.php';
-require_once 'model/payment.php';
 
+require_once 'model/account.php';
 class AccountController 
 {
     public function get_account(): void
@@ -15,7 +14,7 @@ class AccountController
 
     public function update_account($id, $username, $password): void
     {
-        $controller = new Members();
+        $controller = new Accounts();
         $controller->update_account(sanitizeString($id), sanitizeString($username), sanitizeString($password));
         header('location: index.php?home');
     }

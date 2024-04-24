@@ -1,5 +1,8 @@
-<?php 
+<?php
+
 include_once 'layout/header.php';
+
+$member = Member::get_by_id($_SESSION['account_id']);
 ?>
 <h1>Data from MySQL Table</h1>
 <table class="styled-table">
@@ -19,32 +22,19 @@ include_once 'layout/header.php';
     </tr>
     </thead>
     <tbody>
-    <?php
-
-
-    if ($member) {
-        foreach ($member as $row) {
-            echo "<tr>";
-            echo "<td>" . $row['id'] . "</td>";
-            echo "<td>" . $row['name'] . "</td>";
-            echo "<td>" . $row['family_name'] . "</td>";
-            echo "<td>" . $row['birthday'] . "</td>";
-            echo "<td>" . $row['address'] . "</td>";
-            echo "<td>" . $row['membership'] . "</td>";
-            echo "<td>" . $row['discount'] . "%</td>";
-            echo "<td> €" . ($row['amount'] - ($row['amount'] * ($row['discount'] / 100))) . ",- </td>";
-            echo "<td>$role</td>";
-            echo "<td><a href='index.php?edit&id=" . $row['id'] . "&name=" . $row['name'] . "&birthday=" . $row['birthday'] ."'>Edit</a></td>";
-            echo "<td><a href='index.php?delete&id=" . $row['id'] . "'>Delete</a></td>";
-            echo "</tr>";
-        }
-    } else {
-        echo "No member found.";
-    }
-    ?>
+    <td><?php echo htmlentities($member->id); ?></td>
+    <td><?php echo htmlentities($member->name); ?></td>
+    <td><?php echo htmlentities($member->family_name); ?></td>
+    <td><?php echo htmlentities($member->birthday); ?></td>
+    <td><?php echo htmlentities($member->address); ?></td>
+    <td><?php echo htmlentities($member->membership); ?></td>
+    <td><?php echo htmlentities($member->discount); ?>%</td>
+    <td>€<?php echo htmlentities(100 - (100 * ($member->discount / 100))); ?>,-</td>
+    <td><?php echo htmlentities($member->role) ?></td>
+    <?php echo "<td><a href='index.php?edit&id=" . htmlentities($member->id) . "&name=" . htmlentities($member->name) . "&birthday=" . htmlentities($member->birthday) ."'>Edit</a></td>"; ?>
+    <?php echo "<td><a href='index.php?delete&id=" . htmlentities($member->id) . "'>Delete</a></td>"; ?>
     </tbody>
 </table>
-
 <a href="index.php?account">Update Account</a>
 
 <h1>Financial details</h1>

@@ -1,7 +1,8 @@
 <?php
 require_once 'model/database.php';
 
-Class Member {
+class Member
+{
 
     public $id;
     public $name;
@@ -10,37 +11,70 @@ Class Member {
     public $address;
     public $membership;
     public $discount;
+    public $role;
 
-    private function __construct($id, $name, $family_name, $birthday, $address, $membership, $discount) {
-        $this->id = $id
-        $this->name = $name
-        $this->family_name = $family_name
-        $this->birthday = $birthday
-        $this->address = $address
-        $this->membership = $membership
-        $this->$discount = $discount
+    public function __construct($id, $name, $family_name, $birthday, $address, $membership, $discount, $role)
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->family_name = $family_name;
+        $this->birthday = $birthday;
+        $this->address = $address;
+        $this->membership = $membership;
+        $this->discount = $discount;
+        $this->role = $role;
     }
 
-    public static function get_member($id): false|array
+    public static function get_by_id($id): Member
     {
         global $pdo;
 
-        $query = "SELECT * FROM eindopdracht.family_member
+        $query = "SELECT id, name, family_name, birthday, address, membership, discount.discount, role FROM eindopdracht.family_member
               INNER JOIN family ON family_member.family_id = family.family_id
               LEFT JOIN discount ON family_member.discount = discount.discount_id
+    LEFT JOIN account ON family_member.account_id = account.account_id
               INNER JOIN payments ON family_member.family_id = payments.payments_id
               INNER JOIN financial_year ON family_member.payments = financial_year.financial_id
               WHERE family_member.id = :id";
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        $members = $stmt->fetchAll();
+        $members = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        foreach ($members as $member) {
-            # code...
-        }
-        
-        return $members
+        return new Member(
+            $members['id'],
+            $members['name'],
+            $members['family_name'],
+            $members['birthday'],
+            $members['address'],
+            $members['membership'],
+            $members['discount'],
+            $members['role'],
+        );
+    }
+
+    public static function update_member($id, $name, $birthday): bool
+    {
+        global $pdo;
+
+        $query = "UPDATE eindopdracht.family_member SET name=:name, birthday=:birthday WHERE id=:id";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':birthday', $birthday);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
+    }
+
+    public static function delete_member($id): bool
+    {
+        global $pdo;
+
+        $query = "DELETE FROM eindopdracht.family_member WHERE id=:id";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
     }
 }
 
