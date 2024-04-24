@@ -1,4 +1,8 @@
 <?php 
+require_once 'model/database.php';
+require_once 'model/members.php';
+require_once 'model/payment.php';
+
 class AccountController 
 {
     public function get_account(): void

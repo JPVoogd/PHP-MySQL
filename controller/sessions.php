@@ -1,6 +1,8 @@
 <?php
 global $pdo;
-include_once 'model/database.php';
+require_once 'model/database.php';
+require_once 'model/members.php';
+require_once 'model/payment.php';
 
 session_start();
 $logged_in = $_SESSION['logged_in'] ?? false;

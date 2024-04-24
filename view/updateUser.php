@@ -1,4 +1,6 @@
 <?php
+include_once 'layout/header.php';
+
 echo <<<_END
 <h1>Gebruiker bewerken</h1>
 <form method="POST" action="index.php?save">
@@ -8,4 +10,6 @@ echo <<<_END
 <input type="submit" value="Update">
 </form>
 _END;
+
+include_once 'layout/footer.php';
 ?>

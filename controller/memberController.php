@@ -1,4 +1,7 @@
 <?php
+require_once 'model/database.php';
+require_once 'model/members.php';
+require_once 'model/payment.php';
 
 class MemberController
 {

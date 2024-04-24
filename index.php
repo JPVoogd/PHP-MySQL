@@ -1,12 +1,7 @@
 <?php
-require_once 'model/database.php';
-require_once 'model/members.php';
-require_once 'model/payment.php';
 require_once 'controller/homeController.php';
 require_once 'controller/memberController.php';
 require_once 'controller/sessions.php';
-
-include_once 'layout/header.php';
 
 //Ontvang de request en verwerk de route naar de juiste controller
 $qs = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
@@ -66,6 +61,4 @@ switch (sanitizeString($action)) {
         $controller->error();
         break;
 }
-
-include_once 'layout/footer.php';
 ?>

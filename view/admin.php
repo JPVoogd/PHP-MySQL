@@ -1,3 +1,7 @@
+<?php 
+include_once 'layout/header.php';
+?>
+
 <h1>Data from MySQL Table</h1>
 <table class="styled-table">
     <thead>
@@ -39,3 +43,7 @@
     ?>
     </tbody>
 </table>
+
+<?php 
+include_once 'layout/footer.php';
+?>

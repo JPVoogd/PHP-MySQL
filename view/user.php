@@ -1,3 +1,6 @@
+<?php 
+include_once 'layout/header.php';
+?>
 <h1>Data from MySQL Table</h1>
 <table class="styled-table">
     <thead>
@@ -98,4 +101,6 @@ else
         echo "<p>Amount still need to be paid: €" . ($row['amount'] - ($row['amount'] * ($row['discount'] / 100))) . ",-</p>";
     }
 }
+
+include_once 'layout/footer.php';
 ?>
