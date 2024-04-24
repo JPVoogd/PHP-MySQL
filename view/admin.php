@@ -25,13 +25,13 @@ include_once 'layout/header.php';
     if ($members) {
         foreach ($members as $member) {
             echo "<tr>";
-            echo "<td>" . $member['id'] . "</td>";
-            echo "<td>" . $member['name'] . "</td>";
-            echo "<td>" . $member['family_name'] . "</td>";
-            echo "<td>" . $member['birthday'] . "</td>";
-            echo "<td>" . $member['address'] . "</td>";
-            echo "<td>" . $member['membership'] . "</td>";
-            echo "<td>" . $member['discount'] . "%</td>";
+            echo "<td>" . htmlentities($member['id']) . "</td>";
+            echo "<td>" . htmlentities($member['name']) . "</td>";
+            echo "<td>" . htmlentities($member['family_name']) . "</td>";
+            echo "<td>" . htmlentities($member['birthday']) . "</td>";
+            echo "<td>" . htmlentities($member['address']) . "</td>";
+            echo "<td>" . htmlentities($member['membership']) . "</td>";
+            echo "<td>" . htmlentities($member['discount']) . "%</td>";
             echo "<td> €" . ($member['amount'] - ($member['amount'] * ($member['discount'] / 100))) . ",- </td>";
             echo "<td><a href='index.php?edit&id=" . $member['id'] . "&name=" . $member['name'] . "&birthday=" . $member['birthday'] . "'>Edit</a></td>";
             echo "<td><a href='index.php?delete&id=" . $member['id'] . "'>Delete</a></td>";
