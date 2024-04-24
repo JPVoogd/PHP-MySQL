@@ -1,7 +1,6 @@
 <?php
 include_once 'layout/header.php';
 
-$members = Members::get_members();
 ?>
 
     <h1>Data from MySQL Table</h1>

@@ -2,7 +2,6 @@
 
 include_once 'layout/header.php';
 
-$member = Member::get_by_id($_SESSION['account_id']);
 ?>
 <h1>Data from MySQL Table</h1>
 <table class="styled-table">
