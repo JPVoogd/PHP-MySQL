@@ -32,6 +32,8 @@ class Members
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt->fetchAll();
+
+        
     }
 
     public function update_member($id, $name, $birthday): bool
