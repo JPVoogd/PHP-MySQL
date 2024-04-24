@@ -1,11 +1,10 @@
 <?php
-require_once 'model/database.php';
 require_once 'model/members.php';
 require_once 'model/payment.php';
 
 class MemberController
 {
-    public function user(): void
+    public function get_user(): void
     {
         require_login($_SESSION['logged_in']);
         $controller = new Members();

@@ -1,5 +1,7 @@
 <?php
+require_once 'controller/accountController.php';
 require_once 'controller/homeController.php';
+require_once 'controller/loginController.php';
 require_once 'controller/memberController.php';
 require_once 'controller/sessions.php';
 
@@ -17,7 +19,7 @@ switch (sanitizeString($action)) {
         break;
     case 'user':
         $controller = new MemberController();
-        $controller->user();
+        $controller->get_user();
         break;
     case 'admin':
         $controller = new LoginController();
