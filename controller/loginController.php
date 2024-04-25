@@ -3,12 +3,6 @@ require_once 'model/members.php';
 require_once 'model/login.php';
 
  class LoginController{
-     public function admin(): void
-     {
-         require_admin($_SESSION['is_admin']);
-         $members = Members::get_all();
-         include 'view/admin.php';
-     }
 
      public function login_page(): void
      {
@@ -51,6 +45,13 @@ require_once 'model/login.php';
              }
          }
          include 'view/login.php';
+     }
+
+     public function admin(): void
+     {
+         require_admin($_SESSION['is_admin']);
+         $members = Members::get_all();
+         include 'view/admin.php';
      }
 
      public function logout(): void

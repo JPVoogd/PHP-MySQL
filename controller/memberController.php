@@ -27,8 +27,10 @@ class MemberController
     {
         $qs = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
         $qsParams = explode('&', $qs);
-        $id = explode("=", $qsParams[1])[1];
+        $id = htmlentities(explode("=", $qsParams[1])[1]);
+
         $member = Member::delete_member($id);
+
         header('location: index.php?home');
     }
 
@@ -40,6 +42,7 @@ class MemberController
         $id = htmlentities(explode("=", $qsParams[1])[1]);
         $name = htmlentities(explode("=", $qsParams[2])[1]);
         $birthday = htmlentities(explode("=", $qsParams[3])[1]);
+        
         include 'view/updateUser.php';
     }
 

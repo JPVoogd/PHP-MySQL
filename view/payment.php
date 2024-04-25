@@ -5,7 +5,7 @@ echo "<select name='year' onchange='this.form.submit()'>";
 echo "<option disabled selected value> --- select a financial year --- </option>";
 foreach($years as $year)
 {
-    if($_POST['year'] && $years->year == $_POST['year'])
+    if($_POST['year'] && $year->year == $_POST['year'])
     {
         echo "<option value='" . htmlentities($year->year) . "' selected>" . htmlentities($year->year) . "</option>";
     } else {

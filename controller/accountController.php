@@ -19,12 +19,10 @@ class AccountController
 
     public function update_account($id, $email, $password): void
     {
-
         $id = sanitizeString($id);
         $email = sanitizeString($email)
         $password = sanitizeString($password)
 
-        $controller = new Accounts();
         $account = Account::update_account($id, $email, $password);
         header('location: index.php?home');
     }
