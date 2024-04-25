@@ -36,6 +36,7 @@ include_once 'layout/header.php';
 </table>
 <a href="index.php?account">Update Account</a>
 
+/*
 <h1>Financial details</h1>
 <?php
 echo "<form action='index.php?user' method='POST'>";
@@ -90,6 +91,9 @@ else
         echo "<p>Amount still need to be paid: €" . ($row['amount'] - ($row['amount'] * ($row['discount'] / 100))) . ",-</p>";
     }
 }
+*/
+
+include_once 'view/payment.php';
 
 include_once 'layout/footer.php';
 ?>

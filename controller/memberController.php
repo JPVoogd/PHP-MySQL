@@ -1,5 +1,4 @@
 <?php
-require_once 'model/members.php';
 require_once 'model/member.php';
 require_once 'model/payment.php';
 
@@ -10,13 +9,17 @@ class MemberController
         require_login($_SESSION['logged_in']);
         $member = Member::get_by_id($_SESSION['account_id']);
 
-        $paymentController = new Payment();
-        $financial_years = $paymentController->get_financial_years();
+        // $paymentController = new Payment();
+        // $financial_years = $paymentController->get_financial_years();
+
+        //$years = Payment::get_financial_years;
+        $years = Year::get_all();
 
         $payments = "";
         if (isset($_POST['year'])) {
-            $payments = $paymentController->get_payments($_SESSION['account_id'], $_POST['year']);
+            $payments = Payment::get_payments($_SESSION['account_id'], $_POST['year']);
         }
+
         include 'view/user.php';
     }
 
