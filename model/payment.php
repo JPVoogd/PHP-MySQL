@@ -7,13 +7,15 @@ class Payment
     public $payment_id;
     public $user_id;
     public $amount;
+    public $name;
     public $financial_year;
 
-    public function __construct($payment_id, $user_id, $amount, $financial_year) {
+    public function __construct($payment_id, $user_id, $name, $amount, $financial_year) {
         $this->payment_id = $payment_id;
         $this->user_id = $user_id;
+        $this->name = $name;
         $this->amount = $amount;
-        $this->financial_year = $financial_year
+        $this->financial_year = $financial_year;
     }
 
     // public static function get_financial_years(): false|array
@@ -30,7 +32,7 @@ class Payment
     {
         global $pdo;
 
-        $query = "SELECT payments_id, user_id, amount, financial_year FROM payments
+        $query = "SELECT payments_id, user_id, name, amount, financial_year FROM payments
               LEFT JOIN family_member ON family_member.id = payments.payments_id
               INNER JOIN financial_year ON financial_year.financial_id = payments.financial_year
               WHERE payments.user_id = :family_member_id
@@ -45,6 +47,7 @@ class Payment
             $payments[] = new Payment(
                 $row['payments_id'],
                 $row['user_id'],
+                $row['name'],
                 $row['amount'],
                 $row['financial_year'],
             );

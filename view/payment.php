@@ -7,9 +7,9 @@ foreach($years as $year)
 {
     if($_POST['year'] && $years->year == $_POST['year'])
     {
-        echo "<option value='" . $year->year . "' selected>" . $year->year . "</option>";
+        echo "<option value='" . htmlentities($year->year) . "' selected>" . htmlentities($year->year) . "</option>";
     } else {
-        echo "<option value='" . $year->year . "'>" . $year->year . "</option>";
+        echo "<option value='" . htmlentities($year->year) . "'>" . htmlentities($year->year) . "</option>";
     }
 }
 echo "</select>";
@@ -30,20 +30,29 @@ else if($payments)
         </tr>
         </thead>
         <tbody>
-        <?php
+            <tr>
+                <td><?php htmlentities($payments->payment_id) ?></td>
+                <td>U+20ac<?php ($payments->amount - ($payments->amount * ($member->discount / 100))) ?>,-</td>
+                <td><?php (htmlentities($payments->amount) - (htmlentities($payments->amount) * (htmlentities($member->discount) / 100))) ?></td>
+                <td><?php htmlentities($payments->name)  ?></td>
+                <td><?php htmlentities($payments->financial_year) ?></td>
+            </tr>
+
+        <!-- <?php
             echo "<tr>";
-            echo "<td>" . $payments->payment_id . "</td>";
+            echo "<td>" . htmlentities($payments->payment_id) . "</td>";
             echo "<td> €" . ($payments->amount - ($payments->amount * ($member->discount / 100))) . ",- </td>";
-            echo "<td>" . $row['name'] . "</td>";
-            echo "<td>" . $payments->financial_year . "</td>";
+            echo "<td>" . htmlentities($payments->name) . "</td>";
+            echo "<td>" . htmlentities($payments->financial_year) . "</td>";
             echo "</tr>";
-        ?>
+        ?> -->
         </tbody>
     </table>
 
 <?php }
 else
 {
-        echo "<p>Amount still need to be paid: €" . ($payments->amount - ($payments->amount * ($member->discount / 100))) . ",-</p>";
+        echo "<p>Amount still need to be paid: €" . (htmlentities($payments->amount) - (htmlentities($payments->amount) * (htmlentities($member->discount) / 100))) . ",-</p>";
 
 }
+?>
