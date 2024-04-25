@@ -7,7 +7,7 @@ require_once 'controller/sessions.php';
 
 //Ontvang de request en verwerk de route naar de juiste controller
 $qs = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
-$qsParams = sanitizeString(explode('&', $qs));
+$qsParams = explode('&', $qs);
 $action = !empty($qsParams[0]) ? $qsParams[0] : 'home';
 
 
@@ -43,7 +43,7 @@ switch ($action) {
         break;
     case 'updateAccount':
         $controller = new AccountController();
-        $controller->update_account($_POST['id'], $_POST['username'], $_POST['password']);
+        $controller->update_account($_POST['id'], $_POST['email'], $_POST['password']);
         break;
     case 'login_page':
         $controller = new LoginController();

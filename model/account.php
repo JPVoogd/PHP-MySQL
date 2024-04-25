@@ -1,12 +1,14 @@
 <?php
-class Accounts {
-    public static function update_account($id, $username, $password): bool
+
+class Accounts
+{
+    public static function update_account($id, $email, $password): bool
     {
         global $pdo;
 
-        $query = "UPDATE eindopdracht.account SET email=:username, password=:password WHERE account_id=:id";
+        $query = "UPDATE eindopdracht.account SET email=:email, password=:password WHERE account_id=:id";
         $stmt = $pdo->prepare($query);
-        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':id', $id);
         $stmt->execute();

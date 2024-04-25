@@ -1,6 +1,7 @@
 <?php
 require_once 'model/member.php';
 require_once 'model/payment.php';
+require_once 'model/years.php';
 
 class MemberController
 {
@@ -9,11 +10,8 @@ class MemberController
         require_login($_SESSION['logged_in']);
         $member = Member::get_by_id($_SESSION['account_id']);
 
-        // $paymentController = new Payment();
-        // $financial_years = $paymentController->get_financial_years();
-
-        //$years = Payment::get_financial_years;
-        $years = Year::get_all();
+        $financial_years = Payment::get_financial_years();
+        $years = Years::get_all();
 
         $payments = "";
         if (isset($_POST['year'])) {
@@ -42,7 +40,7 @@ class MemberController
         $id = htmlentities(explode("=", $qsParams[1])[1]);
         $name = htmlentities(explode("=", $qsParams[2])[1]);
         $birthday = htmlentities(explode("=", $qsParams[3])[1]);
-        
+
         include 'view/updateUser.php';
     }
 
@@ -50,9 +48,9 @@ class MemberController
     {
         $id = sanitizeString($id);
         $name = sanitizeString($name);
-        $birthday = sanitizeString($birthday;
+        $birthday = sanitizeString($birthday);
 
-        $member = Member::update_member($id, $name, $birthday));
+        Member::update_member($id, $name, $birthday);
         header('location: index.php?home');
     }
 }
