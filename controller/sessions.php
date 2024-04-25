@@ -1,8 +1,6 @@
 <?php
 global $pdo;
 require_once 'model/database.php';
-require_once 'model/members.php';
-require_once 'model/payment.php';
 
 session_start();
 $logged_in = $_SESSION['logged_in'] ?? false;
@@ -12,7 +10,7 @@ $id = $_SESSION['account_id'] ?? false;
 $role = $_SESSION['role'] ?? false;
 $is_admin = $_SESSION['is_admin'] ?? false;
 
-function login($id, $username, $password, $role): void
+function login(): void
 {
     session_regenerate_id(true);
     $_SESSION['logged_in'] = true;
@@ -22,16 +20,16 @@ function login($id, $username, $password, $role): void
     $_SESSION['role'] = sanitizeString($role);
 }
 
-function logout(): void
-{
-    $_SESSION = [];
+// function logout(): void
+// {
+//     $_SESSION = [];
 
-    $params = session_get_cookie_params();
-    setcookie('PHPSESSID', '', time() - 3600, $params['path'],
-        $params['domain'], $params['secure'], $params['httponly']);
+//     $params = session_get_cookie_params();
+//     setcookie('PHPSESSID', '', time() - 3600, $params['path'],
+//         $params['domain'], $params['secure'], $params['httponly']);
 
-    session_destroy();
-}
+//     session_destroy();
+// }
 
 function require_login($logged_in): void
 {

@@ -24,7 +24,7 @@ class Members
 
     }
 
-    public static function get_members(): false|array
+    public static function get_all(): false|array
     {
         global $pdo;
 

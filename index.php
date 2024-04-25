@@ -7,19 +7,19 @@ require_once 'controller/sessions.php';
 
 //Ontvang de request en verwerk de route naar de juiste controller
 $qs = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
-$qsParams = explode('&', $qs);
+$qsParams = sanitizeString(explode('&', $qs));
 $action = !empty($qsParams[0]) ? $qsParams[0] : 'home';
 
 
 // Controleer welke controller en methode moet worden uitgevoerd
-switch (sanitizeString($action)) {
+switch ($action) {
     case 'home':
         $controller = new HomeController();
         $controller->index();
         break;
     case 'user':
         $controller = new MemberController();
-        $controller->get_user();
+        $controller->get_member();
         break;
     case 'admin':
         $controller = new LoginController();
@@ -27,7 +27,7 @@ switch (sanitizeString($action)) {
         break;
     case 'edit':
         $controller = new MemberController();
-        $controller->get_member();
+        $controller->edit_member();
         break;
     case 'save':
         $controller = new MemberController();

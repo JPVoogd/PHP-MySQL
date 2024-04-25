@@ -32,24 +32,24 @@ class Member
         $query = "SELECT id, name, family_name, birthday, address, membership, discount.discount, role FROM eindopdracht.family_member
               INNER JOIN family ON family_member.family_id = family.family_id
               LEFT JOIN discount ON family_member.discount = discount.discount_id
-    LEFT JOIN account ON family_member.account_id = account.account_id
+            LEFT JOIN account ON family_member.account_id = account.account_id
               INNER JOIN payments ON family_member.family_id = payments.payments_id
               INNER JOIN financial_year ON family_member.payments = financial_year.financial_id
               WHERE family_member.id = :id";
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        $members = $stmt->fetch(PDO::FETCH_ASSOC);
+        $member = $stmt->fetch(PDO::FETCH_ASSOC);
 
         return new Member(
-            $members['id'],
-            $members['name'],
-            $members['family_name'],
-            $members['birthday'],
-            $members['address'],
-            $members['membership'],
-            $members['discount'],
-            $members['role'],
+            $member['id'],
+            $member['name'],
+            $member['family_name'],
+            $member['birthday'],
+            $member['address'],
+            $member['membership'],
+            $member['discount'],
+            $member['role'],
         );
     }
 

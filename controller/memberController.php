@@ -5,7 +5,7 @@ require_once 'model/payment.php';
 
 class MemberController
 {
-    public function get_user(): void
+    public function get_member(): void
     {
         require_login($_SESSION['logged_in']);
         $member = Member::get_by_id($_SESSION['account_id']);
@@ -29,20 +29,24 @@ class MemberController
         header('location: index.php?home');
     }
 
-    public function get_member(): void
+    public function edit_member(): void
     {
         $qs = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
         $qsParams = explode('&', $qs);
 
-        $id = explode("=", $qsParams[1])[1];
-        $name = explode("=", $qsParams[2])[1];
-        $birthday = explode("=", $qsParams[3])[1];
+        $id = htmlentities(explode("=", $qsParams[1])[1]);
+        $name = htmlentities(explode("=", $qsParams[2])[1]);
+        $birthday = htmlentities(explode("=", $qsParams[3])[1]);
         include 'view/updateUser.php';
     }
 
     public function update_member($id, $name, $birthday): void
     {
-        $member = Member::update_member(sanitizeString($id), sanitizeString($name), sanitizeString($birthday));
+        $id = sanitizeString($id);
+        $name = sanitizeString($name);
+        $birthday = sanitizeString($birthday;
+
+        $member = Member::update_member($id, $name, $birthday));
         header('location: index.php?home');
     }
 }

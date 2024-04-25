@@ -1,6 +1,6 @@
 <?php
 class Accounts {
-    public function update_account($id, $username, $password): bool
+    public static function update_account($id, $username, $password): bool
     {
         global $pdo;
 

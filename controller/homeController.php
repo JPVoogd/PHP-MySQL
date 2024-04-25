@@ -5,7 +5,7 @@ class HomeController
 {
     public function index(): void
     {
-        $members = Members::get_members();
+        $members = Members::get_all();
         include 'view/home.php';
     }
 

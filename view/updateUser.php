@@ -1,11 +1,6 @@
 <?php
 include_once 'layout/header.php';
 
-// Sanitize variables
-$id = htmlentities($id);
-$username = htmlentities($name);
-$password = htmlentities($birthday);
-
 echo <<<_END
 <h1>Gebruiker bewerken</h1>
 <form method="POST" action="index.php?save">
