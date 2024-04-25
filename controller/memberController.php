@@ -10,14 +10,12 @@ class MemberController
         require_login($_SESSION['logged_in']);
         $member = Member::get_by_id($_SESSION['account_id']);
 
-        $financial_years = Payment::get_financial_years();
         $years = Years::get_all();
 
         $payments = "";
         if (isset($_POST['year'])) {
             $payments = Payment::get_payments($_SESSION['account_id'], $_POST['year']);
         }
-
         include 'view/user.php';
     }
 

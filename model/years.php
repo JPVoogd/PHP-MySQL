@@ -12,7 +12,7 @@ class Years
         $this->year = $year;
     }
 
-    public static function get_all()
+    public static function get_all(): array
     {
         global $pdo;
 
